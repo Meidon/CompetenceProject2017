@@ -18,6 +18,7 @@ public class PlayState extends BasicGameState {
 	float y = 800f;
 	float speed = 0.2f;
 	boolean quit = false;
+	boolean isColliding = false;
 	
 
 	public void init(GameContainer gc, StateBasedGame sbg1) throws SlickException {
@@ -33,7 +34,7 @@ public class PlayState extends BasicGameState {
 		g.drawImage(background, 0,0);
 		player.render(gc,g);
 		box.render(gc,g);
-		
+		g.drawString("Is Colliding: "+isColliding, 100, 100);
 		if(quit == true) {
 			g.drawString("Resume (R)", 250, 100);
 			g.drawString("Main Menu (M)", 250, 125);
@@ -72,6 +73,12 @@ public class PlayState extends BasicGameState {
 		}
 		player.update(gc, delta);
 		box.update(gc, delta);
+		
+		if(player.playerCollider.intersects(box.BoxCollider)) {
+			isColliding = true;
+		} else {
+			isColliding = false;
+		}
 		
 	}
 	
