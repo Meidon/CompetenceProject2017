@@ -4,11 +4,13 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 
 public class PlayState extends BasicGameState {
 
-	int stateID = 3;
+
 	Image background;
 	Player player;
 	Packages box;
@@ -17,12 +19,7 @@ public class PlayState extends BasicGameState {
 	float speed = 0.2f;
 	boolean quit = false;
 	
-	public PlayState(int stateID) {
-		
-		this.stateID = stateID;
-	}
-	
-	@Override
+
 	public void init(GameContainer gc, StateBasedGame sbg1) throws SlickException {
 	
 		background = new Image("res/background.jpg");
@@ -30,10 +27,9 @@ public class PlayState extends BasicGameState {
 		box = new Packages(150,150);
 	}
 	
-	@Override
+
 	public void render(GameContainer gc, StateBasedGame sbg,
 			org.newdawn.slick.Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
 		g.drawImage(background, 0,0);
 		player.render(gc,g);
 		box.render(gc,g);
@@ -48,10 +44,9 @@ public class PlayState extends BasicGameState {
 		}
 	}
 
-	@Override
+
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 			throws SlickException {
-		// TODO Auto-generated method stub
 		
 		Input input = gc.getInput();
 		
@@ -64,7 +59,7 @@ public class PlayState extends BasicGameState {
 				quit = false;
 			}
 			if(input.isKeyDown(Input.KEY_M)) {
-				sbg.enterState(0);
+				sbg.enterState(0, new FadeOutTransition(), new FadeInTransition());
 				try {
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
@@ -80,10 +75,9 @@ public class PlayState extends BasicGameState {
 		
 	}
 	
-	@Override
+
 	public int getID() {
-		// TODO Auto-generated method stub
-		return 3;
+		return 2;
 	}
 }
 
