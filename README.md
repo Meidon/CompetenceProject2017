@@ -1,2 +1,2 @@
 # CompetenceProject2017
-A Project to demonstrate my current skill level
+A small project for educational and fun purposes
